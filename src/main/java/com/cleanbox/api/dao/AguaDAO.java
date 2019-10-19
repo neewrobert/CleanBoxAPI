@@ -77,5 +77,13 @@ public class AguaDAO implements Serializable {
 		
 		return query.getResultList();
 	}
+	
+	public void deleteAll() {
+		
+		final Query query = em.createQuery(" DELETE FROM AguaInfoModel");
+		
+		query.executeUpdate();
+		
+	}
 
 }
