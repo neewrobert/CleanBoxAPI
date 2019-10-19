@@ -97,5 +97,14 @@ public class CleanBoxRestController implements Serializable {
 		return new ResponseEntity<String>(HttpStatus.CREATED);
 
 	}
+	
+	@ApiOperation(value = "DELETA TODA A BASE")
+	@RequestMapping(value = "/delete/", method = RequestMethod.DELETE)
+	public ResponseEntity<String> clearBase() {
+
+		dao.deleteAll();
+		return new ResponseEntity<String>(HttpStatus.OK);
+
+	}
 
 }
