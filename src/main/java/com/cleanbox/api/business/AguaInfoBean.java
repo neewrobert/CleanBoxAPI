@@ -1,13 +1,10 @@
 package com.cleanbox.api.business;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -26,6 +23,8 @@ public class AguaInfoBean {
 	
 	@Autowired
 	AguaDAO aguaDao;
+	
+	final String pattern = "\\D*\\d+\\D*\\d*\\s*\\|\\s*\\D*\\d+\\D*\\d*";
 
 	public void populaBanco(int dias) {
 		
@@ -96,10 +95,11 @@ public class AguaInfoBean {
 
 	public void gravaMsgMQTT(String message) {
 
-		System.out.println("Entrando no Bean");
+		
+		if(!message.matches(pattern)) {
+			return;
+		}
 		AguaInfoModel model = new AguaInfoModel();
-		System.out.println(message);
-
 		String dadosSlipted[] = message.split("\\|");
 
 		System.out.println("DADOS SPLITED 0: " + dadosSlipted[0]);

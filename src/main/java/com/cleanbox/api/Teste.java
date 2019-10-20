@@ -1,26 +1,41 @@
 package com.cleanbox.api;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.regex.Pattern;
 
 public class Teste {
 
 	public static void main(String[] args) {
 		
 		
-		LocalDate dataFinal = LocalDate.now();
-		LocalDate dataInicial = LocalDate.of(2019, 10, 10);
+		String dados = "123.0 | -123.0";
+		String dados1 = "-123.0 | 212.0";
+		String dados2 = "123 | -212";
+		String dados3 = "12311 | 212";
+		String dados4 = "aaa";
 		
-		List<LocalDate> periodos = new ArrayList<>();
-		Period periodo = Period.between(dataInicial, dataFinal);
-		int dias = periodo.getDays();
+		String[] split = dados1.split("\\|");
 		
 		
-		System.out.println(dias);
+		
+		
+		String pattern = "\\D*\\d+\\D*\\d*\\s*\\|\\s*\\D*\\d+\\D*\\d*";
+		
+		
+		
+		System.out.println(dados.matches(pattern));
+		System.out.println(dados1.matches(pattern));
+		System.out.println(dados2.matches(pattern));
+		System.out.println(dados3.matches(pattern));
+		System.out.println(dados4.matches(pattern));
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 	}
 
