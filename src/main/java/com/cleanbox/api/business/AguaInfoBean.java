@@ -44,7 +44,7 @@ public class AguaInfoBean {
 				Random random = new Random();
 
 				model.setPh(random.nextDouble() * 14);
-				model.setNtu(Double.valueOf(random.nextInt((3000 - 1000) + 1) + 1000));
+				model.setNtu(Double.valueOf(random.nextInt((400 - 150) + 1) + 150));
 				
 
 				cal.set(Calendar.HOUR_OF_DAY, i);
@@ -61,7 +61,7 @@ public class AguaInfoBean {
 				Random random = new Random();
 
 				model.setPh(random.nextDouble() * 14);
-				model.setNtu(Double.valueOf(random.nextInt((3000 - 1000) + 1) + 1000));
+				model.setNtu(Double.valueOf(random.nextInt((400 - 150) + 1) + 150));
 
 				cal.set(Calendar.HOUR_OF_DAY, i);
 				model.setData(cal.getTime());
@@ -77,7 +77,7 @@ public class AguaInfoBean {
 				Random random = new Random();
 
 				model.setPh(random.nextDouble() * 14);
-				model.setNtu(Double.valueOf(random.nextInt((3000 - 1000) + 1) + 1000));
+				model.setNtu(Double.valueOf(random.nextInt((400 - 150) + 1) + 150));
 
 				cal.set(Calendar.HOUR_OF_DAY, i);
 				model.setData(cal.getTime());
@@ -158,7 +158,7 @@ public class AguaInfoBean {
 
 	public List<DiaModel> buscaPorPeriodo(Date dataInical, Date dataFinal) {
 		
-		System.out.println("BEAN - Iniciando busca por periordos");
+		System.out.println("BEAN - Iniciando busca por periodos");
 
 		LocalDate inicialLocalDate = convertToLocalDate(dataInical);
 		LocalDate finalLocalDate = convertToLocalDate(dataFinal);
@@ -200,14 +200,17 @@ public class AguaInfoBean {
 			
 			if(periodosEncontrados > 0) {
 				DiaModel dia = new DiaModel();
-				dia.setData(convertToDate(inicialLocalDate));
+				dia.setData(dataInical);
 				dia.setDetalhesDia(detalhesDoDia);
 
 				diasList.add(dia);
 			}
 			
 
-			inicialLocalDate.plusDays(1);
+			
+			dataInical = convertToDate(inicialLocalDate.plusDays(1));
+			inicialLocalDate = inicialLocalDate.plusDays(1);
+			System.out.println("################ Buscando agora pelo dia: " + dataInical);
 
 		}
 
@@ -279,7 +282,7 @@ public class AguaInfoBean {
 	
 	public Date convertToDate(LocalDate dateToConvert) {
 	    return java.util.Date.from(dateToConvert.atStartOfDay()
-	      .atZone(ZoneId.systemDefault())
+	      .atZone(ZoneId.of("America/Sao_Paulo"))
 	      .toInstant());
 	}
 
