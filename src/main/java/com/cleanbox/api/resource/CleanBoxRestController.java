@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,7 +44,7 @@ public class CleanBoxRestController implements Serializable {
 	@Autowired
 	AguaInfoBean bean;
 
-
+	@CrossOrigin
 	@ApiOperation(value = "Busca entre duas datas")
 	@RequestMapping(value = "/buscaporperiodo/", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<List<DiaModel>> buscaPorPeriodo(
@@ -80,6 +81,7 @@ public class CleanBoxRestController implements Serializable {
 
 	}
 	
+	@CrossOrigin
 	@ApiOperation(value = "Busca por data especifica")
 	@RequestMapping(value = "/buscapordata/", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<List<AguaInfoModel>> buscaPorData(
@@ -105,6 +107,7 @@ public class CleanBoxRestController implements Serializable {
 
 	}
 
+	@CrossOrigin
 	@ApiOperation(value = "Api para popular o banco com valore FAKES")
 	@RequestMapping(value = "/populaBanco/", method = RequestMethod.POST)
 	public ResponseEntity<String> populaBanco() {
@@ -114,6 +117,7 @@ public class CleanBoxRestController implements Serializable {
 
 	}
 
+	@CrossOrigin
 	@ApiOperation(value = "Cadastra um LOG")
 	@RequestMapping(value = "/log/", method = RequestMethod.POST)
 	public ResponseEntity<String> cadastraLaboratorio(@RequestBody AguaInfoModel model) {
@@ -123,6 +127,7 @@ public class CleanBoxRestController implements Serializable {
 
 	}
 	
+	@CrossOrigin
 	@ApiOperation(value = "DELETA TODA A BASE")
 	@RequestMapping(value = "/delete/", method = RequestMethod.DELETE)
 	public ResponseEntity<String> clearBase() {
