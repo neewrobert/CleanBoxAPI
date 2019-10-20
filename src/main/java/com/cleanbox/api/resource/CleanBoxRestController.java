@@ -3,6 +3,7 @@ package com.cleanbox.api.resource;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -74,8 +75,32 @@ public class CleanBoxRestController implements Serializable {
 			return new ResponseEntity("Nenhum valor encontrado", HttpStatus.NO_CONTENT);
 		} else {
 			
-			System.out.println("######### DATA INICIAL: " + dataInicial);
 			return new ResponseEntity<List<DiaModel>>(diasPorPeriodo, HttpStatus.OK);
+		}
+
+	}
+	
+	@ApiOperation(value = "Busca por data especifica")
+	@RequestMapping(value = "/buscapordata/", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<List<AguaInfoModel>> buscaPorData(
+			@RequestParam("data") @DateTimeFormat(pattern="yyyy-MM-dd") Date data) {
+		
+		
+		if(data.after(Calendar.getInstance().getTime())) {
+			return new ResponseEntity("A data nao pode ser maior que a data atual", HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		List<AguaInfoModel> infos = dao.buscaPorData(data);
+		System.out.println("Buscando por periodo");
+		
+		if (infos == null || infos.isEmpty()) {
+			
+			System.out.println("Valores nao encontrados");
+			return new ResponseEntity("Nenhum valor encontrado", HttpStatus.NO_CONTENT);
+		} else {
+			
+			return new ResponseEntity<List<AguaInfoModel>>(infos, HttpStatus.OK);
 		}
 
 	}

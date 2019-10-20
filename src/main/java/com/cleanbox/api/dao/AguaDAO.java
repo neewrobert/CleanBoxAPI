@@ -2,6 +2,7 @@ package com.cleanbox.api.dao;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -60,8 +61,24 @@ public class AguaDAO implements Serializable {
 	
 	public List<AguaInfoModel> buscaPorData(Date data){
 		
-		final Query query = em.createQuery(" SELECT a FROM AguaInfoModel as a WHERE a.data like '%:data'", AguaInfoModel.class);
-		query.setParameter("data", data);
+		
+		Calendar instance = Calendar.getInstance();
+		instance.setTime(data);
+		instance.set(Calendar.HOUR_OF_DAY, 0);
+		instance.set(Calendar.MINUTE, 0);
+		instance.set(Calendar.SECOND, 0);
+		
+		Date inicio = instance.getTime();
+		
+		
+		instance.set(Calendar.HOUR_OF_DAY, 23);
+		instance.set(Calendar.MINUTE, 59);
+		instance.set(Calendar.SECOND, 59);
+		Date fim = instance.getTime();
+		
+		final Query query = em.createQuery(" SELECT a  FROM AguaInfoModel as a WHERE a.data BETWEEN :dataInicial AND :dataFinal ORDER BY a.data ", AguaInfoModel.class);
+		query.setParameter("dataInicial", inicio);
+		query.setParameter("dataFinal", fim);
 		
 		return query.getResultList();
 		
