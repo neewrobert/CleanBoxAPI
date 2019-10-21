@@ -1,7 +1,6 @@
 package com.cleanbox.api.business;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -109,9 +108,8 @@ public class AguaInfoBean {
 		model.setPh(Double.valueOf(dadosSlipted[0]));
 		model.setNtu(Double.valueOf(dadosSlipted[1]));
 
-		LocalDateTime time = LocalDateTime.now();
-		
-		model.setData(Date.from(time.atZone(ZoneId.of("America/Sao_Paulo")).toInstant()));
+		Calendar cal = Calendar.getInstance();
+		model.setData(cal.getTime());
 		System.out.println("model: " + model);
 		System.out.println("Agua DAO: " + aguaDao.toString());
 
@@ -286,10 +284,6 @@ public class AguaInfoBean {
 	    return java.util.Date.from(dateToConvert.atStartOfDay()
 	      .atZone(ZoneId.of("America/Sao_Paulo"))
 	      .toInstant());
-	}
-	
-	public Date convertLocalDateTimeToDate(LocalDateTime dateToConvert) {
-	    return java.util.Date.from(dateToConvert.atZone(ZoneId.of("America/Sao_Paulo")).toInstant());
 	}
 
 }
