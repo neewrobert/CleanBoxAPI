@@ -109,6 +109,7 @@ public class AguaInfoBean {
 		model.setNtu(Double.valueOf(dadosSlipted[1]));
 
 		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.HOUR_OF_DAY, -3);
 		model.setData(cal.getTime());
 		System.out.println("model: " + model);
 		System.out.println("Agua DAO: " + aguaDao.toString());
@@ -267,6 +268,7 @@ public class AguaInfoBean {
 		case NOITE:
 			cal.setTime(data);
 			cal.set(Calendar.HOUR_OF_DAY, 23);
+			cal.set(Calendar.MINUTE, 59);
 			
 			return cal.getTime();
 		}
