@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.cleanbox.api</groupId>
-	<artifactId>exams.api</artifactId>
-	<version>4.0.4</version>
+	<artifactId>cleanbox</artifactId>
+	<version>4.0.5</version>
 	<name>CleanBox</name>
 
 	<properties>
