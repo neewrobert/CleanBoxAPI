@@ -163,6 +163,10 @@ public class AguaInfoBean {
 
 		LocalDate inicialLocalDate = convertToLocalDate(dataInical);
 		LocalDate finalLocalDate = convertToLocalDate(dataFinal);
+		
+		Calendar dataVariavel = Calendar.getInstance();
+		dataVariavel.setTime(dataInical);
+		
 		// calcula os dias entre as datas
 		Period periodo = Period.between(inicialLocalDate, finalLocalDate);
 		int dias = periodo.getDays();
@@ -174,11 +178,11 @@ public class AguaInfoBean {
 		for (int i = 0; i <= dias; i++) {
 
 			DetalheDiaModel detalheDiaModelManha = calculaMediaPorPeriodo(
-					buscaInfoPorPeriodo(Periodo.MANHA, dataInical), Periodo.MANHA);
+					buscaInfoPorPeriodo(Periodo.MANHA, dataVariavel.getTime()), Periodo.MANHA);
 			DetalheDiaModel detalheDiaModelTarde = calculaMediaPorPeriodo(
-					buscaInfoPorPeriodo(Periodo.TARDE, dataInical), Periodo.TARDE);
+					buscaInfoPorPeriodo(Periodo.TARDE, dataVariavel.getTime()), Periodo.TARDE);
 			DetalheDiaModel detalheDiaModelNoite = calculaMediaPorPeriodo(
-					buscaInfoPorPeriodo(Periodo.NOITE, dataInical), Periodo.NOITE);
+					buscaInfoPorPeriodo(Periodo.NOITE, dataVariavel.getTime()), Periodo.NOITE);
 			
 			
 
@@ -201,16 +205,14 @@ public class AguaInfoBean {
 			
 			if(periodosEncontrados > 0) {
 				DiaModel dia = new DiaModel();
-				dia.setData(dataInical);
+				dia.setData(dataVariavel.getTime());
 				dia.setDetalhesDia(detalhesDoDia);
 
 				diasList.add(dia);
 			}
 			
 
-			
-			dataInical = convertToDate(inicialLocalDate.plusDays(1));
-			inicialLocalDate = inicialLocalDate.plusDays(1);
+			dataVariavel.add(Calendar.DAY_OF_MONTH, 1);
 			System.out.println("################ Buscando agora pelo dia: " + dataInical);
 
 		}
