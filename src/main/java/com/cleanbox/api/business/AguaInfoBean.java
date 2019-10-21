@@ -109,10 +109,9 @@ public class AguaInfoBean {
 		model.setPh(Double.valueOf(dadosSlipted[0]));
 		model.setNtu(Double.valueOf(dadosSlipted[1]));
 
-		Calendar cal = Calendar.getInstance();
-		LocalDateTime time = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
+		LocalDateTime time = LocalDateTime.now();
 		
-		model.setData(convertLocalDateTimeToDate(time));
+		model.setData(Date.from(time.atZone(ZoneId.of("America/Sao_Paulo")).toInstant()));
 		System.out.println("model: " + model);
 		System.out.println("Agua DAO: " + aguaDao.toString());
 
