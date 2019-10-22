@@ -53,6 +53,12 @@ public class CleanBoxRestController implements Serializable {
 		
 		System.out.println("######### DATA INICIAL: " + dataInicial);
 		
+		Calendar hoje = Calendar.getInstance();
+		
+		if(dataFinal.after(hoje.getTime())) {
+			return new ResponseEntity("Data final nao deve ser maior que a data atual", HttpStatus.BAD_REQUEST);
+		}
+		
 		if(dataInicial.after(dataFinal)) {
 			return new ResponseEntity("Data inicial deve ser anterior a data final", HttpStatus.BAD_REQUEST);
 		}
